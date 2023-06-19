@@ -5,15 +5,25 @@ import { cn } from "@/lib/utils";
 
 import { signIn } from "next-auth/react";
 import { Icons } from "./Icon";
+import { useToast } from "@/hooks/use-toast";
 
 const UserAuthForm = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const {toast}=useToast()
   const loginWithGoogle = async () => {
     setIsLoading(true);
     try {
+        throw new Error();
       await signIn("google");
+      
     } catch (err) {
-      /* toast error in case of erro*/
+      toast({
+        title: "Error",
+        description: "Could not sign in with Google",
+        duration: 2000,
+        variant:"destructive"
+      });
+      
     } finally {
       setIsLoading(false);
     }
@@ -26,7 +36,7 @@ const UserAuthForm = () => {
         size="sm"
         className="w-full"
       >
-        {isLoading ? null : <Icons.google className="h-5 w-5" />}
+        {isLoading ? null : <Icons.google className="h-4 w-4 mr-2" />}
         Google
       </Button>
     </div>
