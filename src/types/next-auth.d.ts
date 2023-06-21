@@ -10,8 +10,10 @@ declare module "next-auth/jwt"{
 }
 
 declare module "next-auth"{
-    interface session{
-        id:UserId,
-        username?:string|null
+    interface Session{
+        user:User&{
+            id:UserId,
+            username?:string|null
+        }
     }
 }

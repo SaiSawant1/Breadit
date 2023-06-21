@@ -20,12 +20,12 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ token, session }) {
       if (token) {
-        (session.user.id = token.sub),
-          (session.user?.name = token.name),
-          (session.user?.image = token.picture),
-          (session.user?.username = token.username);
+        session.user.id = token.id,
+        session.user.name = token.name,
+        session.user.image = token.picture,
+        session.user.username = token.username;
       }
-      return session;
+      return session
     },
     async jwt(token,user) {
       const dbUser = await db.user.findFirst({
@@ -46,6 +46,14 @@ export const authOptions: NextAuthOptions = {
             username:nanoid(10)
           }
         })
+      }
+      return {
+        id:dbUser.id,
+        name:dbUser.name,
+        email:dbUser.email,
+        picture:dbUser.image,
+        username:dbUser.username,
+
       }
     }
   },
