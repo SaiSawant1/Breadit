@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientSecret:process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
   callbacks: {
@@ -67,5 +67,5 @@ export const authOptions: NextAuthOptions = {
     },
   },
 }
-
+export const getAuthSession = ()=> getServerSession(authOptions) 
 /* {"id":"0vxbo8jrqzlm","type":"CurrentUser","display_name":"Sai Suhas Sawant","name":"Sai Suhas Sawant","email":"saisawant2003@gmail.com","unconfirmed_email":null,"avatar_url":"https://app.planetscale.com/gravatar-fallback.png","created_at":"2023-06-21T14:03:39.579Z","updated_at":"2023-06-21T14:03:51.522Z","flags":{"data_imports":"full","deployment_revert_beta":"full","insights_tablet_type":"full"},"two_factor_auth_required":false,"two_factor_auth_configured":false,"session_expires_at":null,"session_refresh_url":null,"email_verified":false,"staff":false,"oauth":true,"sso":false,"managed":true,"directory_managed":false,"authenticated_cli":false,"tos":true,"read_only":false,"has_oauth_tokens":false} */
