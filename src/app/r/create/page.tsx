@@ -5,8 +5,9 @@ import { Input } from "@/components/ui/Input";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { CreateSubredditPayload } from "@/lib/validators/subreddit";
+import { toast } from "@/hooks/use-toast";
 const page = () => {
   const router = useRouter();
   const [input, setInput] = React.useState<string>("");
@@ -18,6 +19,24 @@ const page = () => {
       const { data } = await axios.post("/api/subreddit", payload);
 
       return data as string;
+    },
+    onError: (err) => {
+      if (err instanceof AxiosError) {
+        if (err.response?.status === 409) {
+          return toast({
+            title: "Subreddit already exists.",
+            description: "Please choose any other name",
+            variant: "destructive",
+          });
+        }
+        if (err.response?.status === 422) {
+          return toast({
+            title: "invalid subreddit name",
+            description: "Please choose any other name",
+            variant: "destructive",
+          });
+        }
+      }
     },
   });
 
@@ -53,7 +72,7 @@ const page = () => {
             className="bg-emerald-200 hover:bg-emerald-600"
             isLoading={isLoading}
             disabled={input.length === 0}
-            onClick={()=>createCommunity()}
+            onClick={() => createCommunity()}
           >
             Create
           </Button>
