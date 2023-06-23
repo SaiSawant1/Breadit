@@ -10,7 +10,7 @@ const SignIn= () => {
         <div className="flex flex-col space-y-2 text-center ">
             <Icons.logo className="mx-auto h-6 w-6"/>
             <h1 className="text-2xl font-semibold tracking-tight">
-                Welcome Back
+                Please Sign-In
             </h1>
             <p className="text-sm max-w-xs mx-auto">
                 By Continuing you are setting up a Breddit account and agree to our user agreement and Privacy Policy.
@@ -18,7 +18,7 @@ const SignIn= () => {
             {/* sign in form */}
             <UserAuthForm />
             <p className="px-8 text-center text-sm text-zinc-700">
-                New to Breddit? {" "}
+                Already have account? {" "}
                 <Link href="/sign-up" className="hover:text-zinc-800 text-sm underline-offset-4">
                     Sign Up
                 </Link>
