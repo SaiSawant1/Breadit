@@ -90,7 +90,7 @@ model Post {
   author      User       @relation(fields: [authorID], references: [id])
   authorID    String
   comments    Comment[]
-  Vote        Vote[]
+  votes        Vote[]
 }
 
 model Comment {
