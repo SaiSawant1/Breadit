@@ -8,9 +8,11 @@ import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { CreateSubredditPayload } from "@/lib/validators/subreddit";
 import { toast } from "@/hooks/use-toast";
+import { useCustomToast } from "@/hooks/use-custom-toast";
 const page = () => {
   const router = useRouter();
   const [input, setInput] = React.useState<string>("");
+  const {loginToast}=useCustomToast()
   const { mutate: createCommunity, isLoading } = useMutation({
     mutationFn: async () => {
       const payload: CreateSubredditPayload = {
@@ -36,8 +38,19 @@ const page = () => {
             variant: "destructive",
           });
         }
+        if(err.response?.status===401){
+          return loginToast()
+        }
+        toast({
+          title: "Something went wrong",
+          description: "Please try again later",
+          variant: "destructive",
+        })
       }
     },
+    onSuccess: (data) => {
+      router.push(`/r/${data}`);
+    }
   });
 
   return (
