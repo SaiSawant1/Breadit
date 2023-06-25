@@ -30,7 +30,7 @@ export async function POST(req: Request) {
         if(err instanceof z.ZodError){
             return new Response(err.message, {status:422})
         }
-        return new Response(err.message, {status:500})
+        return new Response("could not create community due to certain reasons", {status:500})
     }
   }
 }
