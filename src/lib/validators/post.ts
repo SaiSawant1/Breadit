@@ -3,7 +3,7 @@ import z from "zod"
 export const PostValidator = z.object({
     title:z
     .string()
-    .min(3,{message:"Title must be longer than 3 characters"})
+    .min(3,{message:"Title must be longer than 3 characters for submission"})
     .max(128,{message:"Title must be at least 128 characters"}),
     subredditId:z.string() ,
     content:z.any(),
