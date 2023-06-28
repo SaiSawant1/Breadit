@@ -39,20 +39,20 @@ model Session {
 }
 
 model User {
-  id            String         @id @default(cuid())
-  name          String?
-  email         String?        @unique
-  emailVerified DateTime?
-  username      String?        @unique
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  Post          Post[]
-  Comments      Comment[]
-  CommentVote   CommentVote[]
-  Vote          Vote[]
-  createdSubreddits Subreddit[] @relation("CreatedBy")
-  Subscription  Subscription[]
+  id                String         @id @default(cuid())
+  name              String?
+  email             String?        @unique
+  emailVerified     DateTime?
+  username          String?        @unique
+  image             String?
+  accounts          Account[]
+  sessions          Session[]
+  Post              Post[]
+  Comments          Comment[]
+  CommentVote       CommentVote[]
+  Vote              Vote[]
+  createdSubreddits Subreddit[]    @relation("CreatedBy")
+  Subscription      Subscription[]
 }
 
 model Subreddit {
@@ -63,7 +63,7 @@ model Subreddit {
   posts     Post[]
 
   creatorId   String?
-  Creator     User?          @relation("CreatedBy",fields: [creatorId], references: [id])
+  Creator     User?          @relation("CreatedBy", fields: [creatorId], references: [id])
   subscribers Subscription[]
   userId      String?
 
@@ -80,17 +80,17 @@ model Subscription {
 }
 
 model Post {
-  id          String     @id @default(cuid())
+  id          String    @id @default(cuid())
   title       String
   content     Json?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @default(now())
-  subreddit   Subreddit? @relation(fields: [subredditId], references: [id])
-  subredditId String?
-  author      User       @relation(fields: [authorID], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now())
+  subreddit   Subreddit @relation(fields: [subredditId], references: [id])
+  subredditId String
+  author      User      @relation(fields: [authorID], references: [id])
   authorID    String
   comments    Comment[]
-  votes        Vote[]
+  votes       Vote[]
 }
 
 model Comment {
