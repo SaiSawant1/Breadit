@@ -6,6 +6,9 @@ import React from 'react'
 import { Button } from '../ui/Button'
 import { ArrowBigDown, ArrowBigUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useMutation } from '@tanstack/react-query'
+import { PostVoteRequest } from '@/lib/validators/votes'
+import axios from 'axios'
 
 interface PostVoteClientProps{
   postId: string,
@@ -28,6 +31,18 @@ const PostVoteClient:React.FC<PostVoteClientProps> = ({
   React.useEffect(()=>{
     setCurrentVote(initialVote)
   },[initialVote])
+
+  
+  const {}=useMutation({
+    mutationFn:async(type:VoteType)=>{
+      const payload:PostVoteRequest={
+        postId,
+        vote:type,
+      }
+      const {data}= await axios.patch("/api/subreddit/post/vote",payload)
+    }
+  })
+
 
   return (
     <div className='flex sm:flex-col gap-4 sm:gap-0 pr-6 sm:w-20 pb-4 sm:pb-0'>
