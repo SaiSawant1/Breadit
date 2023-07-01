@@ -25,7 +25,7 @@ const PostFeed: React.FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
     ["infinite-query"],
     async ({ pageParam = 1 }) => {
       const query =
-        `/api/posts?limit${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}` +
+        `/api/posts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}` +
         (!!subredditName ? `&subreddit=${subredditName}` : "");
       const { data } = await axios.get(query);
       return data as ExtendedPost[];
@@ -38,6 +38,11 @@ const PostFeed: React.FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
     }
   );
 
+  React.useEffect(()=>{
+    if(entry?.isIntersecting){
+      fetchNextPage()
+    }
+  },[entry,fetchNextPage])
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
   return (
     <ul className="flex flex-col col-span-2 space-y-6">
