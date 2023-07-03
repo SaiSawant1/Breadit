@@ -4,8 +4,9 @@ import { FC } from "react";
 import {Avatar, AvatarFallback } from "./Avatar";
 import Image from "next/image";
 import { Icons } from "./Icon";
+import { AvatarProps } from "@radix-ui/react-avatar";
 
-interface UserAvatarProps{
+interface UserAvatarProps extends AvatarProps {
     user:Pick<User,"name"|"image">
 }
 
