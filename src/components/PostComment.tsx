@@ -7,10 +7,14 @@ import { formatTimeToNow } from "@/lib/utils";
 type ExtendedComment = Comment & {
   votes: CommentVote[];
   author: User;
+ 
 };
 
 interface PostCommentProps {
   comment: ExtendedComment;
+  votesAmt: number
+  currentVote: CommentVote | undefined
+  postId: string
 }
 const PostComment: React.FC<PostCommentProps> = ({ comment }) => {
   const commentRef = React.useRef<HTMLDivElement>(null);
@@ -25,12 +29,15 @@ const PostComment: React.FC<PostCommentProps> = ({ comment }) => {
           }}
         />
         <div className="ml-2 flex items-center gap-x-2">
-            <p className="text-sm font-medium text-gray-900">u/{comment.author.username}</p>
+          <p className="text-sm font-medium text-gray-900">
+            u/{comment.author.username}
+          </p>
+          <p className="max-h-40 truncate text-xs text-zinc-500 ">
+            {formatTimeToNow(new Date(comment.createdAt))}
+          </p>
         </div>
-        <p className="max-h-40 truncate text-xs text-zinc-500 ">
-          {formatTimeToNow(new Date(comment.createdAt))}
-        </p>
       </div>
+      <p className="text-sm text-zinc-900 mt-2 ">{comment.text}</p>
     </div>
   );
 };
