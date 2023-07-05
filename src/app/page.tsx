@@ -28,7 +28,7 @@ export default async function Home() {
           <div className="-my-3 divide-y divide-gray-500 px-6 py-4 text-sm leading-6">
               <div className="flex justify-between gap-x-4 py-3">
                 <p className="text-zinc-500">
-                  your personal Breaddit feed. Come here to check in with our favorites communities.
+                  your personal Breadit feed. Come here to check in with our favorites communities.
                 </p>
               </div>
               <Link href="/r/create" className={buttonVariants({

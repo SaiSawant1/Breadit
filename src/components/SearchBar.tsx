@@ -36,9 +36,9 @@ const SearchBar = () => {
     enabled: false,
   })
 
-  const request = debounce(() => {
+  const request = debounce(async() => {
     refetch()
-  })
+  },300)
 
   const debounceRequest = React.useCallback(() => {
     request()
