@@ -9,7 +9,7 @@ import axios, { AxiosError } from "axios";
 import { CreateSubredditPayload } from "@/lib/validators/subreddit";
 import { toast } from "@/hooks/use-toast";
 import { useCustomToast } from "@/hooks/use-custom-toast";
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const [input, setInput] = React.useState<string>("");
   const {loginToast}=useCustomToast()
@@ -95,4 +95,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
